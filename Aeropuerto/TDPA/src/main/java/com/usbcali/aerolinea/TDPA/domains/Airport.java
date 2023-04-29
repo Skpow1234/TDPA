@@ -1,9 +1,19 @@
 package com.usbcali.aerolinea.TDPA.domains;
-import jakarta.persistence.*;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "airports")
 public class Airport {
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -14,27 +24,7 @@ public class Airport {
     @Column(name = "name")
     private String name;
 
-    public Long getId() {
-        return id;
-    }
+    public Airport(Long departureAirportId) {
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getIataCode() {
-        return iataCode;
-    }
-
-    public void setIataCode(String iataCode) {
-        this.iataCode = iataCode;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }

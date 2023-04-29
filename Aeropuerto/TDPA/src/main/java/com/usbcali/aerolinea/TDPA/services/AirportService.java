@@ -1,28 +1,15 @@
 package com.usbcali.aerolinea.TDPA.services;
 
-import com.usbcali.aerolinea.TDPA.domains.Airport;
-import com.usbcali.aerolinea.TDPA.repositories.AirportRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.usbcali.aerolinea.TDPA.dtos.AirportDTO;
 
-@Service
-public class AirportService {
-    @Autowired
-    private AirportRepository airportRepository;
+public interface AirportService {
 
-    public Airport saveAirport(Airport airport) {
-        return airportRepository.save(airport);
-    }
+    AirportDTO saveAirport(AirportDTO airportDTO);
 
-    public Airport getAirport(Long id) {
-        return airportRepository.findById(id).orElse(null);
-    }
+    AirportDTO getAirport(Long id);
 
-    public void deleteAirport(Long id) {
-        airportRepository.deleteById(id);
-    }
+    void deleteAirport(Long id);
 
-    public Airport getAirportByIataCode(String iataCode) {
-        return airportRepository.findByIataCode(iataCode);
-    }
+    AirportDTO getAirportByIataCode(String iataCode);
 }
+

@@ -1,45 +1,49 @@
 package com.usbcali.aerolinea.TDPA.controllers;
 
-import com.usbcali.aerolinea.TDPA.domains.Airport;
+import com.usbcali.aerolinea.TDPA.dtos.AirportDTO;
 import com.usbcali.aerolinea.TDPA.services.AirportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/airports")
 public class AirportController {
+
     @Autowired
     private AirportService airportService;
 
-    @PostMapping
-    public ResponseEntity<Airport> createAirport(@RequestBody Airport airport) {
-        Airport savedAirport = airportService.saveAirport(airport);
-        return new ResponseEntity<>(savedAirport, HttpStatus.CREATED);
+    @PostMapping(path = "/createAirport",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<AirportDTO> createAirport(@RequestBody AirportDTO airportDTO) {
+        AirportDTO savedAirportDTO = airportService.saveAirport(airportDTO);
+        return new ResponseEntity<>(savedAirportDTO, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Airport> getAirport(@PathVariable Long id) {
-        Airport airport = airportService.getAirport(id);
-        if (airport == null) {
+    @GetMapping("/getAirport/{id}")
+    public ResponseEntity<AirportDTO> getAirport(@PathVariable Long id) {
+        AirportDTO airportDTO = airportService.getAirport(id);
+        if (airportDTO == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(airport, HttpStatus.OK);
+        return new ResponseEntity<>(airportDTO, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteAirport/{id}")
     public ResponseEntity<Void> deleteAirport(@PathVariable Long id) {
         airportService.deleteAirport(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/iata/{iataCode}")
-    public ResponseEntity<Airport> getAirportByIataCode(@PathVariable String iataCode) {
-        Airport airport = airportService.getAirportByIataCode(iataCode);
-        if (airport == null) {
+    public ResponseEntity<AirportDTO> getAirportByIataCode(@PathVariable String iataCode) {
+        AirportDTO airportDTO = airportService.getAirportByIataCode(iataCode);
+        if (airportDTO == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(airport, HttpStatus.OK);
+        return new ResponseEntity<>(airportDTO, HttpStatus.OK);
     }
 }
