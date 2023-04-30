@@ -2,6 +2,7 @@ package com.usbcali.aerolinea.TDPA.services.implementations;
 
 import com.usbcali.aerolinea.TDPA.domains.Airport;
 import com.usbcali.aerolinea.TDPA.dtos.AirportDTO;
+import com.usbcali.aerolinea.TDPA.mappers.AirportMapper;
 import com.usbcali.aerolinea.TDPA.repositories.AirportRepository;
 import com.usbcali.aerolinea.TDPA.services.AirportService;
 import jakarta.persistence.EntityNotFoundException;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,6 +22,11 @@ public class AirportServiceImpl implements AirportService {
 
     @Autowired
     private ModelMapper modelMapper;
+
+    public AirportServiceImpl(AirportRepository airportRepository, ModelMapper modelMapper) {
+        this.airportRepository = airportRepository;
+        this.modelMapper = modelMapper;
+    }
 
     @Override
     public AirportDTO saveAirport(AirportDTO airportDTO) throws IllegalArgumentException {
@@ -38,6 +45,10 @@ public class AirportServiceImpl implements AirportService {
             return modelMapper.map(optionalAirport.get(), AirportDTO.class);
         }
         throw new EntityNotFoundException("Airport with id " + id + " not found");
+    }
+    @Override
+    public List<AirportDTO> getAirports(){
+        return AirportMapper.domainToDtoList(airportRepository.findAll());
     }
 
     @Override

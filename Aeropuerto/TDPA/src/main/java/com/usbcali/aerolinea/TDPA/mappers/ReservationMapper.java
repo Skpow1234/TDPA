@@ -23,7 +23,7 @@ public class ReservationMapper {
                 .build();
     }
 
-    public static List<ReservationDTO> domainToDTOList(List<Reservation> reservations) {
+    public static List<ReservationDTO> domainToDtoList(List<Reservation> reservations) {
         return reservations.stream().map(reservation -> domainToDto(reservation)).collect(Collectors.toList());
     }
 

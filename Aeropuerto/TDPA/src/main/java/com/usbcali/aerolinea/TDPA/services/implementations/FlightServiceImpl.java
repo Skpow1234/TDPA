@@ -2,6 +2,7 @@ package com.usbcali.aerolinea.TDPA.services.implementations;
 
 import com.usbcali.aerolinea.TDPA.domains.Flight;
 import com.usbcali.aerolinea.TDPA.dtos.FlightDTO;
+import com.usbcali.aerolinea.TDPA.mappers.FlightMapper;
 import com.usbcali.aerolinea.TDPA.repositories.FlightRepository;
 import com.usbcali.aerolinea.TDPA.services.FlightService;
 import org.modelmapper.ModelMapper;
@@ -40,6 +41,10 @@ public class FlightServiceImpl implements FlightService {
         } else {
             throw new NoSuchElementException("Flight with ID " + id + " not found.");
         }
+    }
+    @Override
+    public List<FlightDTO> getFlights(){
+        return FlightMapper.domainToDtoList(flightRepository.findAll());
     }
 
     @Override

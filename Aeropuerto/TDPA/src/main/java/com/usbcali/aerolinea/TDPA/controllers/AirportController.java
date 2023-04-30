@@ -8,6 +8,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/airports")
 public class AirportController {
@@ -30,6 +32,10 @@ public class AirportController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(airportDTO, HttpStatus.OK);
+    }
+    @GetMapping("/getAirports")
+    public ResponseEntity<List<AirportDTO>> getAirports()  throws Exception {
+        return new ResponseEntity(airportService.getAirports(), HttpStatus.OK);
     }
 
     @DeleteMapping("/deleteAirport/{id}")

@@ -1,5 +1,6 @@
 package com.usbcali.aerolinea.TDPA.controllers;
 
+import com.usbcali.aerolinea.TDPA.dtos.AirportDTO;
 import com.usbcali.aerolinea.TDPA.dtos.FlightDTO;
 import com.usbcali.aerolinea.TDPA.services.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,10 @@ public class FlightController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(flightDTO, HttpStatus.OK);
+    }
+    @GetMapping("/getFlights")
+    public ResponseEntity<List<AirportDTO>> getFlights()  throws Exception {
+        return new ResponseEntity(flightService.getFlights(), HttpStatus.OK);
     }
 
     @DeleteMapping("/deleteFlight/{id}")

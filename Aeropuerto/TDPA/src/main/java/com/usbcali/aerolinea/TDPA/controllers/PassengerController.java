@@ -8,6 +8,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/passengers")
 public class PassengerController {
@@ -29,6 +31,10 @@ public class PassengerController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(passengerDTO, HttpStatus.OK);
+    }
+    @GetMapping("/getPassengers")
+    public ResponseEntity<List<PassengerDTO>> getPassengers()  throws Exception {
+        return new ResponseEntity(passengerService.getPassengers(), HttpStatus.OK);
     }
 
     @DeleteMapping("/deletePassenger/{id}")

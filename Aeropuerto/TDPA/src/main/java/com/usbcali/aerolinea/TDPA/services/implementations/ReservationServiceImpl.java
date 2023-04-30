@@ -2,6 +2,7 @@ package com.usbcali.aerolinea.TDPA.services.implementations;
 
 import com.usbcali.aerolinea.TDPA.domains.Reservation;
 import com.usbcali.aerolinea.TDPA.dtos.ReservationDTO;
+import com.usbcali.aerolinea.TDPA.mappers.ReservationMapper;
 import com.usbcali.aerolinea.TDPA.repositories.ReservationRepository;
 import com.usbcali.aerolinea.TDPA.services.ReservationService;
 import org.modelmapper.ModelMapper;
@@ -9,6 +10,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -46,7 +48,10 @@ public class ReservationServiceImpl implements ReservationService {
             throw new RuntimeException("Reservation not found for given id", e);
         }
     }
-
+    @Override
+    public List<ReservationDTO> getReservations(){
+        return ReservationMapper.domainToDtoList(reservationRepository.findAll());
+    }
     @Override
     public void deleteReservation(Long id) {
         try {

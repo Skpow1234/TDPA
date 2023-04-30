@@ -8,6 +8,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/reservations")
 public class ReservationController {
@@ -35,6 +37,10 @@ public class ReservationController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(reservationDTO, HttpStatus.OK);
+    }
+    @GetMapping("/getReservations")
+    public ResponseEntity<List<ReservationDTO>> getReservations()  throws Exception {
+        return new ResponseEntity(reservationService.getReservations(), HttpStatus.OK);
     }
 
     @DeleteMapping("/deleteReservation/{id}")

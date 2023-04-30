@@ -9,6 +9,9 @@ import java.util.stream.Collectors;
 
 public class FlightMapper {
     public static FlightDTO domainToDto(Flight flight){
+        if (flight == null) {
+            return null;
+        }
         return  FlightDTO.builder()
                 .id(flight.getId())
                 .flightNumber(flight.getFlightNumber())
@@ -30,11 +33,11 @@ public class FlightMapper {
                 .build();
     }
 
-    public static List<FlightDTO> entityListToDtoList(List<Flight> flights){
+    public static List<FlightDTO> domainToDtoList(List<Flight> flights){
         return flights.stream().map(f -> domainToDto(f)).collect(Collectors.toList());
     }
 
-    public static List<Flight> dtoListToEntityList(List<FlightDTO> flightDTOs){
+    public static List<Flight> dtoListToDomain(List<FlightDTO> flightDTOs){
         return flightDTOs.stream().map(f -> dtoToDomain(f)).collect(Collectors.toList());
     }
 }

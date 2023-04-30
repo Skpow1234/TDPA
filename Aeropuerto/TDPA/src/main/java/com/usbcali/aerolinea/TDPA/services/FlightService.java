@@ -8,6 +8,7 @@ import java.util.List;
 public interface FlightService {
     FlightDTO saveFlight(FlightDTO flightDTO);
     FlightDTO getFlight(Long id);
+    List<FlightDTO> getFlights();
     void deleteFlight(Long id);
     List<FlightDTO> searchFlights(String departureAirportIataCode, String arrivalAirportIataCode, LocalDate departureDate);
 }
