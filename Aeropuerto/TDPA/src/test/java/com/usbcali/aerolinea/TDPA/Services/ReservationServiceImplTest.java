@@ -11,6 +11,8 @@ import org.mockito.Mock;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
@@ -67,8 +69,29 @@ public class ReservationServiceImplTest {
     }
     @Test
     public void testGetReservations() {
+        // Given
+        Reservation reservation1 = new Reservation();
+        reservation1.setId(1L);
+        Reservation reservation2 = new Reservation();
+        reservation2.setId(2L);
+        List<Reservation> reservations = Arrays.asList(reservation1, reservation2);
+        ReservationDTO reservationDTO1 = new ReservationDTO();
+        reservationDTO1.setId(1L);
+        ReservationDTO reservationDTO2 = new ReservationDTO();
+        reservationDTO2.setId(2L);
+        List<ReservationDTO> reservationDTOs = Arrays.asList(reservationDTO1, reservationDTO2);
 
+        when(reservationRepository.findAll()).thenReturn(reservations);
+        when(modelMapper.map(reservations, ReservationDTO[].class)).thenReturn(reservationDTOs.toArray(new ReservationDTO[0]));
+
+        // When
+        List<ReservationDTO> retrievedReservations = reservationService.getReservations();
+
+        // Then
+        assertEquals(reservationDTOs, retrievedReservations);
+        verify(reservationRepository).findAll();
     }
+
 
     @Test
     public void testDeleteReservation() {

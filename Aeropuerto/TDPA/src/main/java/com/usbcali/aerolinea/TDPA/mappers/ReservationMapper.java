@@ -10,16 +10,16 @@ public class ReservationMapper {
     public static ReservationDTO domainToDto(Reservation reservation) {
         return ReservationDTO.builder()
                 .id(reservation.getId())
-                .passenger(PassengerMapper.domainToDto(reservation.getPassenger()))
-                .flight(FlightMapper.domainToDto(reservation.getFlight()))
+                .passenger(reservation.getPassenger())
+                .flight((reservation.getFlight()))
                 .build();
     }
 
     public static Reservation dtoToDomain(ReservationDTO reservationDTO) {
         return Reservation.builder()
                 .id(reservationDTO.getId())
-                .passenger(PassengerMapper.dtoToDomain(reservationDTO.getPassenger()))
-                .flight(FlightMapper.dtoToDomain(reservationDTO.getFlight()))
+                .passenger((reservationDTO.getPassenger()))
+                .flight((reservationDTO.getFlight()))
                 .build();
     }
 

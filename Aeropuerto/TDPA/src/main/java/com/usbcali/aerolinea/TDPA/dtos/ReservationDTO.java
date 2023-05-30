@@ -1,5 +1,7 @@
 package com.usbcali.aerolinea.TDPA.dtos;
 
+import com.usbcali.aerolinea.TDPA.domains.Flight;
+import com.usbcali.aerolinea.TDPA.domains.Passenger;
 import lombok.*;
 
 @Data
@@ -9,6 +11,6 @@ import lombok.*;
 @ToString
 public class ReservationDTO {
     private Long id;
-    private PassengerDTO passenger;
-    private FlightDTO flight;
+    private Passenger passenger;
+    private Flight flight;
 }
