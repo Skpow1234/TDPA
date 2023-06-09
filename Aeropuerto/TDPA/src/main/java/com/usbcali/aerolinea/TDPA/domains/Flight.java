@@ -25,14 +25,14 @@ public class Flight {
     @Column(name = "departure_date")
     private LocalDate departureDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "departure_airport_id")
     private Airport departureAirport;
 
     @Column(name = "arrival_date")
     private LocalDate arrivalDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "arrival_airport_id")
     private Airport arrivalAirport;
 
